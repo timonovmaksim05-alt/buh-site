@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ru" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Бухучёт — счета, контрагенты, проводки</title>
+<meta name="description" content="Система учёта для бухгалтерии: счета, контрагенты, проводки и отчёты.">
+<link rel="icon" href="data:,">
+<script>
+(()=>{const r=document.documentElement;try{const t=localStorage.getItem('theme'),a=localStorage.getItem('accent');r.dataset.theme=t||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');if(a){r.style.setProperty('--accent',a);r.style.setProperty('--accent-rgb',[1,3,5].map(i=>parseInt(a.substr(i,2),16)).join(','))}}catch(e){}})();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<script type="module" src="app.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">Перейти к основному контенту</a>
+<header class="top">
+  <button class="burger" id="menuBtn" type="button" aria-label="Открыть меню" aria-expanded="false" aria-controls="nav"><span></span><span></span><span></span></button>
+  <h1>Бухучёт</h1>
+  <form class="tools" onsubmit="return false">
+    <label for="theme">Тема</label>
+    <select id="theme"><option value="auto">Авто</option><option value="light">Светлая</option><option value="dark">Тёмная</option><option value="blue">Corporate Blue</option></select>
+    <label for="accent">Акцент</label>
+    <input id="accent" type="color" value="#2563eb">
+  </form>
+</header>
+<nav id="nav" aria-label="Разделы">
+  <ul>
+    <li><a href="#main" data-tab="invoices">Счета</a></li>
+    <li><a href="#main" data-tab="counterparties">Контрагенты</a></li>
+    <li><a href="#main" data-tab="entries">Проводки</a></li>
+    <li><a href="#report">Отчёты</a></li>
+  </ul>
+</nav>
+<button class="overlay" id="overlay" type="button" aria-label="Закрыть меню" tabindex="-1"></button>
+<aside id="side">
+  <form id="filters" aria-label="Фильтры">
+    <h2>Фильтры</h2>
+    <p class="field"><label for="q">Поиск</label><input id="q" name="q" type="search" placeholder="Название, ID, описание" autocomplete="off"></p>
+    <p class="field"><label for="kind">Тип</label><select id="kind" name="kind"></select></p>
+    <fieldset id="statuses"><legend>Статус</legend></fieldset>
+    <fieldset>
+      <legend>Вид</legend>
+      <input class="sr" type="radio" name="view" id="v1" value="cards" checked><label class="opt radio" for="v1">Карточки</label>
+      <input class="sr" type="radio" name="view" id="v2" value="table"><label class="opt radio" for="v2">Таблица</label>
+    </fieldset>
+    <button class="btn" id="reset" type="reset" disabled>Сбросить</button>
+  </form>
+</aside>
+<main id="main" tabindex="-1">
+  <header class="head"><h2 id="mt">Счета</h2><button class="btn primary" id="add" type="button">Добавить запись</button></header>
+  <section id="report" aria-label="Отчёт"><dl id="stats"></dl></section>
+  <div class="tabs" role="tablist" aria-label="Разделы учёта">
+    <button role="tab" id="tab-invoices" data-tab="invoices" aria-selected="true" aria-controls="panel" type="button">Счета</button>
+    <button role="tab" id="tab-counterparties" data-tab="counterparties" aria-selected="false" aria-controls="panel" type="button">Контрагенты</button>
+    <button role="tab" id="tab-entries" data-tab="entries" aria-selected="false" aria-controls="panel" type="button">Проводки</button>
+  </div>
+  <section id="panel" role="tabpanel" aria-live="polite" aria-labelledby="tab-invoices" tabindex="0"></section>
+</main>
+<footer>
+  <p>© <time datetime="2026">2026</time> Бухучёт. Учебный проект.</p>
+  <address>Связь: <a href="mailto:buh@example.ru">buh@example.ru</a></address>
+</footer>
+<section id="toasts" aria-label="Уведомления"></section>
+<dialog id="modal" aria-labelledby="mTitle"></dialog>
+</body>
+</html>
